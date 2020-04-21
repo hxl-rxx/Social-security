@@ -65,7 +65,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"delete from Company where ID='{Id}'";
+                string sql = $"delete from company where ID='{Id}'";
                 var query = connection.Query(sql);
                 return Convert.ToInt32(query);
             }
