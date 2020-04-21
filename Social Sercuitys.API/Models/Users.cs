@@ -9,6 +9,6 @@ namespace Social_Sercuitys.API.Models
     {
         public int ID { get; set; }
         public int name { get; set; }
-        public int Age { get; set; }
+        public int Add { get; set; }
     }
 }
