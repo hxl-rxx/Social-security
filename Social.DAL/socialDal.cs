@@ -17,8 +17,8 @@ namespace Social.DAL
         /// <summary>
         /// 登录
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="pwd"></param>
+        /// <param name="name">用户名</param>
+        /// <param name="pwd">密码</param>
         /// <returns></returns>
         public int Login(string name,string pwd)
         {
