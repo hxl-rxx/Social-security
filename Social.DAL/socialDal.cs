@@ -11,6 +11,7 @@ namespace Social.DAL
 {
     public class socialDal
     {
+        //连接字符串
         static readonly string Coon = ConfigurationManager.ConnectionStrings["MySql"].ConnectionString;
 
         /// <summary>
