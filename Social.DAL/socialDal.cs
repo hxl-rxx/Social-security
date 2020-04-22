@@ -52,9 +52,9 @@ namespace Social.DAL
 
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"insert into company values('{company.Name}','{company.Salesman}','{company.CreateTime}')";
-                var query = connection.Query(sql);
-                return Convert.ToInt32(query);
+                string sql = $"insert into company values(null,'{company.Name}','{company.Salesman}','{company.CreateTime}')";
+                var query = connection.Execute(sql);
+                return query;
             }
          }
         /// <summary>
@@ -67,8 +67,8 @@ namespace Social.DAL
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
                 string sql = $"delete from company where ID='{Id}'";
-                var query = connection.Query(sql);
-                return Convert.ToInt32(query);
+                var query = connection.Execute(sql);
+                return query;
             }
          }
         /// <summary>
@@ -82,8 +82,8 @@ namespace Social.DAL
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
                 string sql = $"Update Company set Name='{company.Name}',Salesman='{company.Salesman}',CreateTime='{company.CreateTime}' where ID='{Id}'";
-                var query = connection.Query(sql);
-                return Convert.ToInt32(query);
+                var query = connection.Execute(sql);
+                return query;
             }
         }
         /// <summary>
@@ -122,9 +122,9 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"insert into employee values ('{employee.Name}','{employee.IDCard}','{employee.IDCard}','{employee.Sex}','{employee.Cid}','{employee.Tel}','{employee.Address}') ";
-                var query = connection.Query(sql);
-                return Convert.ToInt32(query);
+                string sql = $"insert into employee values (null,'{employee.Name}','{employee.IDCard}','{employee.IDCard}','{employee.Sex}','{employee.Cid}','{employee.Tel}','{employee.Address}') ";
+                var query = connection.Execute(sql);
+                return query;
             }
         }
         /// <summary>
@@ -136,8 +136,8 @@ namespace Social.DAL
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
                 string sql = $"delete from employee where Id  ='{id}'";
-                var query = connection.Query(sql);
-                return Convert.ToInt32(query);
+                var query = connection.Execute(sql);
+                return query;
             }
         }
         /// <summary>
@@ -150,7 +150,7 @@ namespace Social.DAL
             {
                 string sql = $"Update employee set Name='{employee.Name}',IDCard='{employee.IDCard}',Sex='{employee.Sex}',Cid='{employee.Cid}', Tel='{employee.Tel}', Address='{employee.Address}' where ID='{Id}'";
                 var query = connection.Execute(sql);
-                return Convert.ToInt32(query);
+                return query;
             }
         }
         /// <summary>
@@ -176,9 +176,9 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"insert into userLogin values('{user.Name}','{user.PassWord}','{user.Userlevel}')";
-                var query = connection.Query(sql);
-                return Convert.ToInt32(query);
+                string sql = $"insert into userLogin values(null,'{user.Name}','{user.PassWord}','{user.Userlevel}')";
+                var query = connection.Execute(sql);
+                return query;
             }
         }
 
@@ -204,9 +204,9 @@ namespace Social.DAL
         {
             using(MySqlConnection connection=new MySqlConnection(Coon))
             {
-                string sql = $"insert into payinfo values('{payinfo.Cid}','{payinfo.Eid}','{payinfo.ExpenType}','{payinfo.lid}','{payinfo.Ccost}','{payinfo.Ecost}','{payinfo.Month}','{payinfo.BeginMonth}','{payinfo.EndMonth}')";
-                var query = connection.Query(sql);
-                return Convert.ToInt32(query);
+                string sql = $"insert into payinfo values(null,'{payinfo.Cid}','{payinfo.Eid}','{payinfo.ExpenType}','{payinfo.lid}','{payinfo.Ccost}','{payinfo.Ecost}','{payinfo.Month}','{payinfo.BeginMonth}','{payinfo.EndMonth}')";
+                var query = connection.Execute(sql);
+                return query;
             }
         }
         /// <summary>
