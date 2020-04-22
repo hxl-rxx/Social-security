@@ -15,7 +15,7 @@ namespace Social.DAL
         static readonly string Coon = ConfigurationManager.ConnectionStrings["MySql"].ConnectionString;
 
         /// <summary>
-        /// 登录
+        /// 用户登录
         /// </summary>
         /// <param name="name">用户名</param>
         /// <param name="pwd">密码</param>
