@@ -166,5 +166,90 @@ namespace Social.DAL
             }
         }
 
+        /// <summary>
+        /// 注册信息
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public int Adduser(userLogin user)
+        {
+            using (MySqlConnection connection = new MySqlConnection(Coon))
+            {
+                string sql = $"insert into userLogin values('{user.Name}','{user.PassWord}','{user.Userlevel}')";
+                var query = connection.Query(sql);
+                return Convert.ToInt32(query);
+            }
+        }
+
+        /// <summary>
+        /// 显示缴费明细
+        /// </summary>
+        /// <returns></returns>
+        public List<payinfo> GetPayinfos()
+        {
+            using(MySqlConnection connection=new MySqlConnection(Coon))
+            {
+                string sql = "select * from payinfo p join company c on p.Cid=c.ID join employee on p.Eid=e.ID join insuranceType t on p.lid=t.ID ";
+                var query = connection.Query<payinfo>(sql);
+                return query.ToList();
+            }
+        }
+        /// <summary>
+        /// 添加缴费明细
+        /// </summary>
+        /// <param name="payinfo"></param>
+        /// <returns></returns>
+        public int AddPayInto(payinfo payinfo)
+        {
+            using(MySqlConnection connection=new MySqlConnection(Coon))
+            {
+                string sql = $"insert into payinfo values('{payinfo.Cid}','{payinfo.Eid}','{payinfo.ExpenType}','{payinfo.lid}','{payinfo.Ccost}','{payinfo.Ecost}','{payinfo.Month}','{payinfo.BeginMonth}','{payinfo.EndMonth}')";
+                var query = connection.Query(sql);
+                return Convert.ToInt32(query);
+            }
+        }
+        /// <summary>
+        /// 查询缴费明细
+        /// </summary>
+        /// <returns></returns>
+        public List<payinfo> GetPayinfos(int cid,string Name,string IDcard,int lid)
+        {
+            using (MySqlConnection connection = new MySqlConnection(Coon))
+            {
+                string sql = $"select * from payinfo p join company c on p.Cid=c.ID join employee on p.Eid=e.ID join insuranceType t on p.lid=t.ID where Cid='{cid}' || e.Name like '%'+{Name}+'%'|| e.IDcard='{IDcard}' || t.ID='{lid}' ";
+                var query = connection.Query<payinfo>(sql);
+                return query.ToList();
+            }
+        }
+
+        /// <summary>
+        /// 查询权限信息
+        /// </summary>
+        /// <returns></returns>
+        public List<Power> GetPowers(string name)
+        {
+            using (MySqlConnection connection = new MySqlConnection(Coon))
+            {
+                string sql = $"select *from power where Name like '%'+{name}+'%'";
+                var query = connection.Query<Power>(sql);
+                return query.ToList();
+
+            }
+        }
+        /// <summary>
+        /// 查询险种信息
+        /// </summary>
+        /// <returns></returns>
+        public List<Insurancetype> GetInsurancetypes(string name)
+        {
+            using (MySqlConnection connection = new MySqlConnection(Coon))
+            {
+                string sql = $"select *from insurancetype where Name like '%'+{name}+'%'";
+                var query = connection.Query<Insurancetype>(sql);
+                return query.ToList();
+
+            }
+        }
+
     }
 }

@@ -127,5 +127,62 @@ namespace Social_Sercuitys.API.Controllers
         {
             return bll.UptEmployees(id,employees);
         }
+        /// <summary>
+        /// 注册信息
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+       [HttpPost]
+        public int Adduser(userLogin user)
+        {
+            return bll.Adduser(user);
+        }
+
+        /// <summary>
+        /// 显示缴费明细
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public List<payinfo> GetPayinfos()
+        {
+            return bll.GetPayinfos();
+        }
+        /// <summary>
+        /// 添加缴费明细
+        /// </summary>
+        /// <param name="payinfo"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public int AddPayInto(payinfo payinfo)
+        {
+            return bll.AddPayInto(payinfo);
+        }
+        /// <summary>
+        /// 查询缴费明细
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public List<payinfo> GetPayinfos(int cid, string Name, string IDcard, int lid)
+        {
+            return bll.GetPayinfos(cid, Name, IDcard, lid);
+        }
+        /// <summary>
+        /// 查询权限信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public List<Power> GetPowers(string name)
+        {
+            return bll.GetPowers(name);
+        }
+        /// <summary>
+        /// 查询险种信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public List<Insurancetype> GetInsurancetypes(string name)
+        {
+            return bll.GetInsurancetypes(name);
+        }
     }
 }

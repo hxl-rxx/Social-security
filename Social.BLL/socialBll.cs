@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using Social.DAL;
@@ -108,5 +109,56 @@ namespace Social.BLL
             return dal.UptEmployees(id,employees);
         }
 
+        /// <summary>
+        /// 注册信息
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public int Adduser(userLogin user)
+        {
+            return dal.Adduser(user);
+        }
+
+        /// <summary>
+        /// 显示缴费明细
+        /// </summary>
+        /// <returns></returns>
+        public List<payinfo> GetPayinfos()
+        {
+            return dal.GetPayinfos();
+        }
+        /// <summary>
+        /// 添加缴费明细
+        /// </summary>
+        /// <param name="payinfo"></param>
+        /// <returns></returns>
+        public int AddPayInto(payinfo payinfo)
+        {
+            return dal.AddPayInto(payinfo);
+        }
+        /// <summary>
+        /// 查询缴费明细
+        /// </summary>
+        /// <returns></returns>
+        public List<payinfo> GetPayinfos(int cid, string Name, string IDcard, int lid)
+        {
+            return dal.GetPayinfos(cid, Name, IDcard, lid);
+        }
+        /// <summary>
+        /// 查询权限信息
+        /// </summary>
+        /// <returns></returns>
+        public List<Power> GetPowers(string name)
+        {
+            return dal.GetPowers(name);
+        }
+        /// <summary>
+        /// 查询险种信息
+        /// </summary>
+        /// <returns></returns>
+        public List<Insurancetype> GetInsurancetypes(string name)
+        {
+            return dal.GetInsurancetypes(name);
+        }
     }
 }
