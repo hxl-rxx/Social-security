@@ -47,7 +47,7 @@ namespace Social_Sercuitys.API.Controllers
         /// 删除员工信息
         /// </summary>
         /// <returns></returns>
-        [HttpDelete]
+       [HttpDelete]
         public int DelEmployees(int id)
         {
             return employeeBll.DelEmployees(id);
