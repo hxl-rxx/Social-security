@@ -21,7 +21,7 @@ namespace Social.DAL
         /// <param name="pwd">密码</param>
         /// <returns></returns>
         public int Login(string name,string pwd)
-        {
+        {            
             using(MySqlConnection connection=new MySqlConnection(Coon))
             {
                 string sql = $"select count(1) from userLogin where Name='{name}' and passWord='{pwd}' " ;
@@ -224,7 +224,7 @@ namespace Social.DAL
         }
 
         /// <summary>
-        /// 查询权限信息
+        /// 查看权限信息
         /// </summary>
         /// <returns></returns>
         public List<Power> GetPowers(string name)
