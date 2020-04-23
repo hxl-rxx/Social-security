@@ -37,7 +37,7 @@ namespace Social_Sercuitys.API.Controllers
         /// 添加员工信息
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
+       [HttpPost]
         public int AddEmployees(Employees employee)
         {
             return employeeBll.AddEmployees(employee);
