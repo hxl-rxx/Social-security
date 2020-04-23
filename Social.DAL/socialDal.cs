@@ -12,7 +12,7 @@ namespace Social.DAL
     public class socialDal
     {
         //连接字符串
-        static readonly string Coon = ConfigurationManager.ConnectionStrings["MySql"].ConnectionString;
+        static readonly string coon = ConfigurationManager.ConnectionStrings["MySql"].ConnectionString;
 
         /// <summary>
         /// 用户登录
@@ -22,7 +22,7 @@ namespace Social.DAL
         /// <returns></returns>
         public int Login(string name,string pwd)
         {
-            using(MySqlConnection connection=new MySqlConnection(Coon))
+            using(MySqlConnection connection=new MySqlConnection(coon))
             {
                 string sql = $"select count(1) from userLogin where Name='{name}' and passWord='{pwd}' " ;
                 var query = connection.ExecuteScalar(sql);
@@ -33,9 +33,9 @@ namespace Social.DAL
         /// 显示注册公司信息
         /// </summary>
         /// <returns></returns>
-        public List<Company> companies()
+        public List<Company> Companies()
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
                 string sql = "select * from company ";
                 var query = connection.Query<Company>(sql);
@@ -50,7 +50,7 @@ namespace Social.DAL
         public int AddCompany(Company company)
         {
 
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
                 string sql = $"insert into company values(null,'{company.Name}','{company.Salesman}','{company.CreateTime}')";
                 var query = connection.Execute(sql);
@@ -60,13 +60,13 @@ namespace Social.DAL
         /// <summary>
         /// 删除公司信息
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public int DelCompany(int Id)
+        public int DelCompany(int id)
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
-                string sql = $"delete from company where ID='{Id}'";
+                string sql = $"delete from company where ID='{id}'";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -74,14 +74,14 @@ namespace Social.DAL
         /// <summary>
         /// 修改公司信息
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <param name="company"></param>
         /// <returns></returns>
-        public int UptCompany(int Id,Company company)
+        public int UptCompany(int id,Company company)
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
-                string sql = $"Update Company set Name='{company.Name}',Salesman='{company.Salesman}',CreateTime='{company.CreateTime}' where ID='{Id}'";
+                string sql = $"Update Company set Name='{company.Name}',Salesman='{company.Salesman}',CreateTime='{company.CreateTime}' where ID='{id}'";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -93,7 +93,7 @@ namespace Social.DAL
         /// <returns></returns>
         public List<Company> GetCompany(string name)
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
                 string sql=($"select * from company where Name like '%'+{name}+'%' ");
                 var query = connection.Query<Company>(sql);
@@ -107,7 +107,7 @@ namespace Social.DAL
         /// <returns></returns>
         public List<Employees> GetEmployees()
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
                 string sql = "select * from employee join company on employee.Cid=company.ID; ";
                 var query = connection.Query<Employees>(sql);
@@ -120,7 +120,7 @@ namespace Social.DAL
         /// <returns></returns>
         public int AddEmployees(Employees employee)
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
                 string sql = $"insert into employee values (null,'{employee.Name}','{employee.IDCard}','{employee.IDCard}','{employee.Sex}','{employee.Cid}','{employee.Tel}','{employee.Address}') ";
                 var query = connection.Execute(sql);
@@ -133,7 +133,7 @@ namespace Social.DAL
         /// <returns></returns>
         public int DelEmployees(int id)
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
                 string sql = $"delete from employee where Id  ='{id}'";
                 var query = connection.Execute(sql);
@@ -144,11 +144,11 @@ namespace Social.DAL
         /// 修改员工信息
         /// </summary>
         /// <returns></returns>
-        public int UptEmployees(int Id,Employees employee)
+        public int UptEmployees(int id,Employees employee)
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
-                string sql = $"Update employee set Name='{employee.Name}',IDCard='{employee.IDCard}',Sex='{employee.Sex}',Cid='{employee.Cid}', Tel='{employee.Tel}', Address='{employee.Address}' where ID='{Id}'";
+                string sql = $"Update employee set Name='{employee.Name}',IDCard='{employee.IDCard}',Sex='{employee.Sex}',Cid='{employee.Cid}', Tel='{employee.Tel}', Address='{employee.Address}' where ID='{id}'";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -159,7 +159,7 @@ namespace Social.DAL
         /// <returns></returns>
         public List<Employees> GetEmployees(string name, string address)
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
                 string sql = $"select * from employee where Name like '%'+{name}+'%' and  Address like '%'+{address}+'%'";
                 var query = connection.Query<Employees>(sql);
@@ -172,9 +172,9 @@ namespace Social.DAL
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public int Adduser(userLogin user)
+        public int Adduser(UserLogin user)
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
                 string sql = $"insert into userLogin values(null,'{user.Name}','{user.PassWord}','{user.Userlevel}')";
                 var query = connection.Execute(sql);
@@ -186,12 +186,12 @@ namespace Social.DAL
         /// 显示缴费明细
         /// </summary>
         /// <returns></returns>
-        public List<payinfo> GetPayinfos()
+        public List<PayInfo> GetPayinfos()
         {
-            using(MySqlConnection connection=new MySqlConnection(Coon))
+            using(MySqlConnection connection=new MySqlConnection(coon))
             {
                 string sql = "select * from payinfo p join company c on p.Cid=c.ID join employee on p.Eid=e.ID join insuranceType t on p.lid=t.ID ";
-                var query = connection.Query<payinfo>(sql);
+                var query = connection.Query<PayInfo>(sql);
                 return query.ToList();
             }
         }
@@ -200,9 +200,9 @@ namespace Social.DAL
         /// </summary>
         /// <param name="payinfo"></param>
         /// <returns></returns>
-        public int AddPayInto(payinfo payinfo)
+        public int AddPayInto(PayInfo payinfo)
         {
-            using(MySqlConnection connection=new MySqlConnection(Coon))
+            using(MySqlConnection connection=new MySqlConnection(coon))
             {
                 string sql = $"insert into payinfo values(null,'{payinfo.Cid}','{payinfo.Eid}','{payinfo.ExpenType}','{payinfo.lid}','{payinfo.Ccost}','{payinfo.Ecost}','{payinfo.Month}','{payinfo.BeginMonth}','{payinfo.EndMonth}')";
                 var query = connection.Execute(sql);
@@ -213,12 +213,12 @@ namespace Social.DAL
         /// 查询缴费明细
         /// </summary>
         /// <returns></returns>
-        public List<payinfo> GetPayinfos(int cid,string Name,string IDcard,int lid)
+        public List<PayInfo> GetPayinfos(int cid,string name,string idCard,int lid)
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
-                string sql = $"select * from payinfo p join company c on p.Cid=c.ID join employee on p.Eid=e.ID join insuranceType t on p.lid=t.ID where Cid='{cid}' || e.Name like '%'+{Name}+'%'|| e.IDcard='{IDcard}' || t.ID='{lid}' ";
-                var query = connection.Query<payinfo>(sql);
+                string sql = $"select * from payinfo p join company c on p.Cid=c.ID join employee on p.Eid=e.ID join insuranceType t on p.lid=t.ID where Cid='{cid}' or e.Name like '%'+{name}+'%'or e.IDcard='{idCard}' or t.ID='{lid}' ";
+                var query = connection.Query<PayInfo>(sql);
                 return query.ToList();
             }
         }
@@ -227,11 +227,11 @@ namespace Social.DAL
         /// 查询权限信息
         /// </summary>
         /// <returns></returns>
-        public List<Power> GetPowers(string name)
+        public List<Power> GetPowers()
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
-                string sql = $"select *from power where Name like '%'+{name}+'%'";
+                string sql = $"select *from power";
                 var query = connection.Query<Power>(sql);
                 return query.ToList();
 
@@ -241,11 +241,11 @@ namespace Social.DAL
         /// 查询险种信息
         /// </summary>
         /// <returns></returns>
-        public List<Insurancetype> GetInsurancetypes(string name)
+        public List<Insurancetype> GetInsurancetypes()
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
+            using (MySqlConnection connection = new MySqlConnection(coon))
             {
-                string sql = $"select *from insurancetype where Name like '%'+{name}+'%'";
+                string sql = $"select *from insurancetype";
                 var query = connection.Query<Insurancetype>(sql);
                 return query.ToList();
 

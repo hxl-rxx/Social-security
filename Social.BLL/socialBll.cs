@@ -25,9 +25,9 @@ namespace Social.BLL
         /// 显示注册公司信息
         /// </summary>
         /// <returns></returns>
-        public List<Company> companies()
+        public List<Company> Companies()
         {
-            return dal.companies();
+            return dal.Companies();
         }
         /// <summary>
         /// 显示员工信息
@@ -50,21 +50,21 @@ namespace Social.BLL
         /// <summary>
         /// 删除公司信息
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public int DelCompany(int Id)
+        public int DelCompany(int id)
         {
-            return dal.DelCompany(Id);
+            return dal.DelCompany(id);
         }
         /// <summary>
         /// 修改公司信息
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <param name="company"></param>
         /// <returns></returns>
-        public int UptCompany(int Id, Company company)
+        public int UptCompany(int id, Company company)
         {
-            return dal.UptCompany(Id, company);
+            return dal.UptCompany(id, company);
         }
         /// <summary>
         /// 查询公司信息
@@ -114,7 +114,7 @@ namespace Social.BLL
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public int Adduser(userLogin user)
+        public int Adduser(UserLogin user)
         {
             return dal.Adduser(user);
         }
@@ -123,7 +123,7 @@ namespace Social.BLL
         /// 显示缴费明细
         /// </summary>
         /// <returns></returns>
-        public List<payinfo> GetPayinfos()
+        public List<PayInfo> GetPayinfos()
         {
             return dal.GetPayinfos();
         }
@@ -132,7 +132,7 @@ namespace Social.BLL
         /// </summary>
         /// <param name="payinfo"></param>
         /// <returns></returns>
-        public int AddPayInto(payinfo payinfo)
+        public int AddPayInto(PayInfo payinfo)
         {
             return dal.AddPayInto(payinfo);
         }
@@ -140,25 +140,25 @@ namespace Social.BLL
         /// 查询缴费明细
         /// </summary>
         /// <returns></returns>
-        public List<payinfo> GetPayinfos(int cid, string Name, string IDcard, int lid)
+        public List<PayInfo> GetPayinfos(int cid, string name, string idCard, int lid)
         {
-            return dal.GetPayinfos(cid, Name, IDcard, lid);
+            return dal.GetPayinfos(cid, name, idCard, lid);
         }
         /// <summary>
         /// 查询权限信息
         /// </summary>
         /// <returns></returns>
-        public List<Power> GetPowers(string name)
+        public List<Power> GetPowers()
         {
-            return dal.GetPowers(name);
+            return dal.GetPowers();
         }
         /// <summary>
         /// 查询险种信息
         /// </summary>
         /// <returns></returns>
-        public List<Insurancetype> GetInsurancetypes(string name)
+        public List<Insurancetype> GetInsurancetypes()
         {
-            return dal.GetInsurancetypes(name);
+            return dal.GetInsurancetypes();
         }
     }
 }

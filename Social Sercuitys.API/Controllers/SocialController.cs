@@ -27,9 +27,9 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<Company> companies()
+        public List<Company> Companies()
         {
-            return bll.companies();
+            return bll.Companies();
         }
 
         /// <summary>
@@ -57,24 +57,24 @@ namespace Social_Sercuitys.API.Controllers
         /// <summary>
         /// 删除公司信息
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        public int DelCompany(int Id)
+        public int DelCompany(int id)
         {
-            return bll.DelCompany(Id);
+            return bll.DelCompany(id);
         }
 
         /// <summary>
         /// 修改公司信息
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <param name="company"></param>
         /// <returns></returns>
         [HttpPut]
-        public int UptCompany(int Id, Company company)
+        public int UptCompany(int id, Company company)
         {
-            return bll.UptCompany(Id, company);
+            return bll.UptCompany(id, company);
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Social_Sercuitys.API.Controllers
         /// <param name="user"></param>
         /// <returns></returns>
        [HttpPost]
-        public int Adduser(userLogin user)
+        public int Adduser(UserLogin user)
         {
             return bll.Adduser(user);
         }
@@ -143,7 +143,7 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<payinfo> GetPayinfos()
+        public List<PayInfo> GetPayinfos()
         {
             return bll.GetPayinfos();
         }
@@ -153,7 +153,7 @@ namespace Social_Sercuitys.API.Controllers
         /// <param name="payinfo"></param>
         /// <returns></returns>
         [HttpPost]
-        public int AddPayInto(payinfo payinfo)
+        public int AddPayInto(PayInfo payinfo)
         {
             return bll.AddPayInto(payinfo);
         }
@@ -162,27 +162,27 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<payinfo> GetPayinfos(int cid, string Name, string IDcard, int lid)
+        public List<PayInfo> GetPayinfos(int cid, string name, string idCard, int lid)
         {
-            return bll.GetPayinfos(cid, Name, IDcard, lid);
+            return bll.GetPayinfos(cid, name, idCard, lid);
         }
         /// <summary>
         /// 查询权限信息
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<Power> GetPowers(string name)
+        public List<Power> GetPowers()
         {
-            return bll.GetPowers(name);
+            return bll.GetPowers();
         }
         /// <summary>
         /// 查询险种信息
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<Insurancetype> GetInsurancetypes(string name)
+        public List<Insurancetype> GetInsurancetypes()
         {
-            return bll.GetInsurancetypes(name);
+            return bll.GetInsurancetypes();
         }
     }
 }
