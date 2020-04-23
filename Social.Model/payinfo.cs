@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Social.Model
 {
-   public class payinfo
+   public class PayInfo
   {
         public int ID { get; set; }
         public int Cid { get; set; }
