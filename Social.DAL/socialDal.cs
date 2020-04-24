@@ -22,7 +22,7 @@ namespace Social.DAL
         /// <returns></returns>
         public int Login(string name,string pwd)
         {
-            using(MySqlConnection connection=new MySqlConnection(Coon))
+            using(MySqlConnection connection=new MySqlConnection(coon))
             {
                 string sql = $"select count(1) from userLogin where Name='{name}' and passWord='{pwd}' " ;
                 var query = connection.ExecuteScalar(sql);

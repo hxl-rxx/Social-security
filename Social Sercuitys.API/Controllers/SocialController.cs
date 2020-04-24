@@ -11,6 +11,7 @@ namespace Social_Sercuitys.API.Controllers
     public class SocialController : ApiController
     {
         socialBll bll = new socialBll();
+        [HttpGet]
         /// <summary>
         /// 登录
         /// </summary>
