@@ -17,7 +17,7 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<payinfo> GetPayinfos()
+        public List<PayInfo> GetPayinfos()
         {
             return payinfoBll.GetPayinfos();
         }
@@ -28,7 +28,7 @@ namespace Social_Sercuitys.API.Controllers
         /// <param name="payinfo"></param>
         /// <returns></returns>
         [HttpPost]
-        public int AddPayInto(payinfo payinfo)
+        public int AddPayInto(PayInfo payinfo)
         {
             return payinfoBll.AddPayInto(payinfo);
         }
@@ -38,7 +38,7 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<payinfo> GetPayinfos(int cid, string Name, string IDcard, int lid)
+        public List<PayInfo> GetPayinfos(int cid, string Name, string IDcard, int lid)
         {
             return payinfoBll.GetPayinfos(cid, Name, IDcard, lid);
         }

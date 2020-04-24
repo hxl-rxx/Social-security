@@ -16,12 +16,12 @@ namespace Social.DAL
         /// 显示缴费明细
         /// </summary>
         /// <returns></returns>
-        public List<payinfo> GetPayinfos()
+        public List<PayInfo> GetPayinfos()
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = "select * from payinfo p join company c on p.Cid=c.ID join employee on p.Eid=e.ID join insuranceType t on p.lid=t.ID ";
-                var query = connection.Query<payinfo>(sql);
+                string sql = "select * from payinfo";
+                var query = connection.Query<PayInfo>(sql);
                 return query.ToList();
             }
         }
@@ -30,7 +30,7 @@ namespace Social.DAL
         /// </summary>
         /// <param name="payinfo"></param>
         /// <returns></returns>
-        public int AddPayInto(payinfo payinfo)
+        public int AddPayInto(PayInfo payinfo)
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
@@ -43,12 +43,12 @@ namespace Social.DAL
         /// 查询缴费明细
         /// </summary>
         /// <returns></returns>
-        public List<payinfo> GetPayinfos(int cid, string Name, string IDcard, int lid)
+        public List<PayInfo> GetPayinfos(int cid, string Name, string IDcard, int lid)
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
                 string sql = $"select * from payinfo p join company c on p.Cid=c.ID join employee on p.Eid=e.ID join insuranceType t on p.lid=t.ID where Cid='{cid}' || e.Name like '%'+{Name}+'%'|| e.IDcard='{IDcard}' || t.ID='{lid}' ";
-                var query = connection.Query<payinfo>(sql);
+                var query = connection.Query<PayInfo>(sql);
                 return query.ToList();
             }
         }

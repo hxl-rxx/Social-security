@@ -14,7 +14,7 @@ namespace Social.BLL
         /// 显示缴费明细
         /// </summary>
         /// <returns></returns>
-        public List<payinfo> GetPayinfos()
+        public List<PayInfo> GetPayinfos()
         {
             return infoDal.GetPayinfos();
         }
@@ -23,7 +23,7 @@ namespace Social.BLL
         /// </summary>
         /// <param name="payinfo"></param>
         /// <returns></returns>
-        public int AddPayInto(payinfo payinfo)
+        public int AddPayInto(PayInfo payinfo)
         {
             return infoDal.AddPayInto(payinfo);
         }
@@ -31,7 +31,7 @@ namespace Social.BLL
         /// 查询缴费明细
         /// </summary>
         /// <returns></returns>
-        public List<payinfo> GetPayinfos(int cid, string Name, string IDcard, int lid)
+        public List<PayInfo> GetPayinfos(int cid, string Name, string IDcard, int lid)
         {
             return infoDal.GetPayinfos(cid, Name, IDcard, lid);
         }
