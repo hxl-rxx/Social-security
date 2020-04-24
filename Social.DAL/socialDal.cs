@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 using Social.Model;
 namespace Social.DAL
 {
-    public class socialDal
+    public class SocialDal
     {
         //连接字符串
         static readonly string coon = ConfigurationManager.ConnectionStrings["SqlData"].ConnectionString;
@@ -29,20 +29,7 @@ namespace Social.DAL
                 return Convert.ToInt32(query);
             }
         }
-        /// <summary>
-        /// 显示注册公司信息
-        /// </summary>
-        /// <returns></returns>
-        public List<Company> Companies()
-        {
-            using (MySqlConnection connection = new MySqlConnection(coon))
-            {
-                string sql = "select * from company ";
-                var query = connection.Query<Company>(sql);
-                return query.ToList();
-            }
-        }
-      
+        
         /// <summary>
         /// 注册信息
         /// </summary>

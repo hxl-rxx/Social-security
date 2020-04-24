@@ -49,7 +49,7 @@
     <Compile Include="CompanyDal.cs" />
     <Compile Include="EmployeeDal.cs" />
     <Compile Include="PayInfoDal.cs" />
-    <Compile Include="socialDal.cs" />
+    <Compile Include="SocialDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
