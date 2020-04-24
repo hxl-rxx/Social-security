@@ -12,7 +12,7 @@ namespace Social.DAL
     public class socialDal
     {
         //连接字符串
-        static readonly string coon = ConfigurationManager.ConnectionStrings["MySql"].ConnectionString;
+        static readonly string coon = ConfigurationManager.ConnectionStrings["SqlData"].ConnectionString;
 
         /// <summary>
         /// 用户登录

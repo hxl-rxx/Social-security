@@ -11,7 +11,7 @@ namespace Social.DAL
 {
    public class CompanyDal
     {
-        static readonly string Coon = ConfigurationManager.ConnectionStrings["MySql"].ConnectionString;
+        static readonly string Coon = ConfigurationManager.ConnectionStrings["SqlData"].ConnectionString;
         /// <summary>
         /// 显示注册公司信息
         /// </summary>
