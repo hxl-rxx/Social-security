@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,22 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = "select e.ID,e.Name,e.IDCard,e.Sex,e.Cid,c.Name,e.Tel,e.Address from employee e join company c  on e.Cid=c.ID; ";
-                var query = connection.Query<Employees>(sql);
-                return query.ToList();
+                string sql = "select * from employee join company on employee.Cid=company.ID; ";
+                MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
+                DataTable dt = new DataTable();
+                dr.Fill(dt);
+                List<Employees> query = dt.AsEnumerable().Select(e => new Employees
+                {
+                    ID = e.Field<int>("ID"),
+                    Name = e.Field<string>("Name"),
+                    Address = e.Field<string>("Address"),
+                    Sex = e.Field<bool>("Sex"),
+                    IDCard = e.Field<string>("IDCard"),
+                    Tel = e.Field<string>("Tel"),
+                    Cid = e.Field<int>("Cid"),
+                    Companys = new Company { Cname = e.Field<string>("Cname"), CreateTime = e.Field<DateTime>("CreateTime"), Salesman = e.Field<string>("Salesman") }
+                }).ToList();
+                return query;
             }
         }
         /// <summary>

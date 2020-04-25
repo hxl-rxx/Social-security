@@ -9,7 +9,7 @@ namespace Social.Model
    public class Company
   {
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string Cname { get; set; }
         public string Salesman { get; set; }
         public DateTime CreateTime { get; set; }
     }

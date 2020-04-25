@@ -39,7 +39,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(coon))
             {
-                string sql = $"insert into userLogin values(null,'{user.Name}','{user.PassWord}','{user.Userlevel}')";
+                string sql = $"insert into userLogin values(null,'{user.Uname}','{user.PassWord}','{user.Userlevel}')";
                 var query = connection.Execute(sql);
                 return query;
             }

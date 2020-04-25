@@ -35,7 +35,7 @@ namespace Social.DAL
 
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"insert into company values(null,'{company.Name}','{company.Salesman}','{company.CreateTime}')";
+                string sql = $"insert into company values(null,'{company.Cname}','{company.Salesman}','{company.CreateTime}')";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -64,7 +64,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"Update Company set Name='{company.Name}',Salesman='{company.Salesman}',CreateTime='{company.CreateTime}' where ID='{Id}'";
+                string sql = $"Update Company set Name='{company.Cname}',Salesman='{company.Salesman}',CreateTime='{company.CreateTime}' where ID='{Id}'";
                 var query = connection.Execute(sql);
                 return query;
             }
