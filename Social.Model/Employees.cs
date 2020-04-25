@@ -16,7 +16,7 @@ namespace Social.Model
         public int Cid { get; set; }
         public string Tel { get; set; }
         public string Address { get; set; }
-        //[ForeignKey("")]
+        [ForeignKey("")]
         public Company Companys { get; set; }
     }
 }

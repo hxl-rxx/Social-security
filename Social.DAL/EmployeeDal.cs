@@ -21,20 +21,20 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = "select * from employee join company on employee.Cid=company.ID; ";
+                string sql = "select * from employee join company on employee.Cid=company.CompanyId; ";
                 MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
                 DataTable dt = new DataTable();
                 dr.Fill(dt);
                 List<Employees> query = dt.AsEnumerable().Select(e => new Employees
                 {
-                    ID = e.Field<int>("ID"),
-                    Name = e.Field<string>("Name"),
-                    Address = e.Field<string>("Address"),
-                    Sex = e.Field<bool>("Sex"),
-                    IDCard = e.Field<string>("IDCard"),
-                    Tel = e.Field<string>("Tel"),
-                    Cid = e.Field<int>("Cid"),
-                    Companys = new Company { Cname = e.Field<string>("Cname"), CreateTime = e.Field<DateTime>("CreateTime"), Salesman = e.Field<string>("Salesman") }
+                    ID = Convert.ToInt32(e["ID"]),
+                    Name = Convert.ToString(e["Name"]),
+                    Address = Convert.ToString(e["Address"]),
+                    Sex = Convert.ToBoolean(e["Sex"]),
+                    IDCard = Convert.ToString(e["IDCard"]),
+                    Tel = Convert.ToString(e["Tel"]),
+                    Cid = Convert.ToInt32(e["Cid"]),
+                    Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
                 }).ToList();
                 return query;
             }
