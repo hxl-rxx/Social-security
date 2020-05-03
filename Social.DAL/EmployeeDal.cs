@@ -1,8 +1,10 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
@@ -13,6 +15,8 @@ namespace Social.DAL
   public  class EmployeeDal
     {
         static readonly string Coon = ConfigurationManager.ConnectionStrings["SqlData"].ConnectionString;
+
+       
         /// <summary>
         /// 显示员工信息
         /// </summary>
@@ -21,7 +25,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = "select * from employee join company on employee.Cid=company.CompanyId; ";
+                string sql = $"select * from employee join company on employee.Cid=company.CompanyId ";
                 MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
                 DataTable dt = new DataTable();
                 dr.Fill(dt);
@@ -30,7 +34,7 @@ namespace Social.DAL
                     ID = Convert.ToInt32(e["ID"]),
                     Name = Convert.ToString(e["Name"]),
                     Address = Convert.ToString(e["Address"]),
-                    Sex = Convert.ToBoolean(e["Sex"]),
+                    Sex = Convert.ToInt32(e["Sex"]),
                     IDCard = Convert.ToString(e["IDCard"]),
                     Tel = Convert.ToString(e["Tel"]),
                     Cid = Convert.ToInt32(e["Cid"]),
@@ -47,7 +51,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"insert into employee values (null,'{employee.Name}','{employee.IDCard}','{employee.IDCard}','{employee.Sex}','{employee.Cid}','{employee.Tel}','{employee.Address}') ";
+                string sql = $"insert into employee values (null,'{employee.Name}','{employee.IDCard}',{employee.Sex},{employee.Cid},'{employee.Tel}','{employee.Address}') ";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -66,14 +70,41 @@ namespace Social.DAL
             }
         }
         /// <summary>
-        /// 修改员工信息
+        /// 反填
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public int UptEmployees(int Id, Employees employee)
+        public Employees PutEmployees(int id)
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"Update employee set Name='{employee.Name}',IDCard='{employee.IDCard}',Sex='{employee.Sex}',Cid='{employee.Cid}', Tel='{employee.Tel}', Address='{employee.Address}' where ID='{Id}'";
+                string sql = $"select * from employee join company on employee.Cid=company.CompanyId where ID={id}; ";
+                MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
+                DataTable dt = new DataTable();
+                dr.Fill(dt);
+                List<Employees> query = dt.AsEnumerable().Select(e => new Employees
+                {
+                    ID = Convert.ToInt32(e["ID"]),
+                    Name = Convert.ToString(e["Name"]),
+                    Address = Convert.ToString(e["Address"]),
+                    Sex = Convert.ToInt32(e["Sex"]),
+                    IDCard = Convert.ToString(e["IDCard"]),
+                    Tel = Convert.ToString(e["Tel"]),
+                    Cid = Convert.ToInt32(e["Cid"]),
+                    Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
+                }).ToList();
+                return query.FirstOrDefault();
+            }
+        }
+        /// <summary>
+        /// 修改员工信息
+        /// </summary>
+        /// <returns></returns>
+        public int UptEmployees(Employees employees)
+        {
+            using (MySqlConnection connection = new MySqlConnection(Coon))
+            { 
+                string sql = $"Update employee set Name='{employees.Name}',IDCard='{employees.IDCard}',Sex={employees.Sex},Cid={employees.Cid}, Tel='{employees.Tel}', Address='{employees.Address}' where ID={employees.ID}";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -82,14 +113,53 @@ namespace Social.DAL
         /// 查询员工信息
         /// </summary>
         /// <returns></returns>
-        public List<Employees> GetEmployees(string name, string address)
+        public List<Employees> GetEmployees(string name)
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"select * from employee where Name like '%'+{name}+'%' and  Address like '%'+{address}+'%'";
-                var query = connection.Query<Employees>(sql);
-                return query.ToList();
+                if (name != null)
+                {
+                    connection.Open();
+                    string sql = $"select * from employee join company on employee.Cid=company.CompanyId";
+                    MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
+                    DataTable dt = new DataTable();
+                    dr.Fill(dt);
+                    List<Employees> query = dt.AsEnumerable().Select(e => new Employees
+                    {
+                        ID = Convert.ToInt32(e["ID"]),
+                        Name = Convert.ToString(e["Name"]),
+                        Address = Convert.ToString(e["Address"]),
+                        Sex = Convert.ToInt32(e["Sex"]),
+                        IDCard = Convert.ToString(e["IDCard"]),
+                        Tel = Convert.ToString(e["Tel"]),
+                        Cid = Convert.ToInt32(e["Cid"]),
+                        Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
+                    }).ToList().Where(e => e.Name.Contains(name)).ToList();
+                    return query;
+                }
+                else
+                {
+                    connection.Open();
+                    string sql = $"select * from employee join company on employee.Cid=company.CompanyId";
+                    MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
+                    DataTable dt = new DataTable();
+                    dr.Fill(dt);
+                    List<Employees> query = dt.AsEnumerable().Select(e => new Employees
+                    {
+                        ID = Convert.ToInt32(e["ID"]),
+                        Name = Convert.ToString(e["Name"]),
+                        Address = Convert.ToString(e["Address"]),
+                        Sex = Convert.ToInt32(e["Sex"]),
+                        IDCard = Convert.ToString(e["IDCard"]),
+                        Tel = Convert.ToString(e["Tel"]),
+                        Cid = Convert.ToInt32(e["Cid"]),
+                        Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
+                    }).ToList();
+                    return query;
+                }
+
             }
         }
     }
+    
 }

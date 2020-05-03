@@ -20,7 +20,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = "select * from company ";
+                string sql = "select * from company";
                 var query = connection.Query<Company>(sql);
                 return query.ToList();
             }

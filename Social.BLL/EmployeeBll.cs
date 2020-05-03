@@ -24,9 +24,9 @@ namespace Social.BLL
         /// 查询员工信息
         /// </summary>
         /// <returns></returns>
-        public List<Employees> GetEmployees(string name, string address)
+        public List<Employees> GetEmployees(string name)
         {
-            return employeeDal.GetEmployees(name, address);
+            return employeeDal.GetEmployees(name);
         }
         /// <summary>
         /// 添加员工信息
@@ -45,12 +45,23 @@ namespace Social.BLL
             return employeeDal.DelEmployees(id);
         }
         /// <summary>
+        /// 反填
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Employees PutEmployees(int id)
+        {
+            return employeeDal.PutEmployees(id);
+         }
+    
+ 
+        /// <summary>
         /// 修改员工信息
         /// </summary>
         /// <returns></returns>
-        public int UptEmployees(int id, Employees employees)
+        public int UptEmployees(Employees employees)
         {
-            return employeeDal.UptEmployees(id, employees);
+            return employeeDal.UptEmployees(employees);
         }
     }
 }

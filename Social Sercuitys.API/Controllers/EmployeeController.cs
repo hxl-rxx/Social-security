@@ -28,16 +28,16 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<Employees> GetEmployees(string name, string address)
+        public List<Employees> GetEmployees(string name)
         {
-            return employeeBll.GetEmployees(name, address);
+            return employeeBll.GetEmployees(name);
         }
 
         /// <summary>
         /// 添加员工信息
         /// </summary>
         /// <returns></returns>
-      [HttpPost]
+        [HttpPost]
         public int AddEmployees(Employees employee)
         {
             return employeeBll.AddEmployees(employee);
@@ -47,20 +47,29 @@ namespace Social_Sercuitys.API.Controllers
         /// 删除员工信息
         /// </summary>
         /// <returns></returns>
-       [HttpDelete]
+       [HttpPost]
         public int DelEmployees(int id)
         {
             return employeeBll.DelEmployees(id);
         }
-
+        /// <summary>
+        /// 反填
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public Employees PutEmployees(int id)
+        {
+            return employeeBll.PutEmployees(id);
+        }
         /// <summary>
         /// 修改员工信息
         /// </summary>
         /// <returns></returns>
-        [HttpPut]
-        public int UptEmployees(int id, Employees employees)
+       [HttpPost]
+        public int UptEmployees(Employees employees)
         {
-            return employeeBll.UptEmployees(id, employees);
+            return employeeBll.UptEmployees(employees);
         }
     }
 }
