@@ -16,7 +16,7 @@ namespace Social.DAL
         /// 显示注册公司信息
         /// </summary>
         /// <returns></returns>
-        public List<Company> companies()
+        public List<Company> GetCompanyList()
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
@@ -35,6 +35,7 @@ namespace Social.DAL
 
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
+                connection.Open();
                 string sql = $"insert into company values(null,'{company.Cname}','{company.Salesman}','{company.CreateTime}')";
                 var query = connection.Execute(sql);
                 return query;
@@ -45,11 +46,11 @@ namespace Social.DAL
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public int DelCompany(int Id)
+        public int DelCompany(int id)
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"delete from company where ID='{Id}'";
+                string sql = $"delete from company where CompanyId='{id}'";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -64,7 +65,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"Update Company set Name='{company.Cname}',Salesman='{company.Salesman}',CreateTime='{company.CreateTime}' where ID='{Id}'";
+                string sql = $"Update Company set Cname='{company.Cname}',Salesman='{company.Salesman}',CreateTime='{company.CreateTime}' where CompanyId='{Id}'";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -78,9 +79,10 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = ($"select * from company where Name like '%'+{name}+'%' ");
+                connection.Open();
+                string sql = "select * from company";
                 var query = connection.Query<Company>(sql);
-                return query.ToList();
+                return query.ToList().Where(s => s.Cname.Contains(name)).ToList();
             }
         }
     }

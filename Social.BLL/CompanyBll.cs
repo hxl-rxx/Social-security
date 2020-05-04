@@ -15,9 +15,9 @@ namespace Social.BLL
         /// 显示注册公司信息
         /// </summary>
         /// <returns></returns>
-        public List<Company> companies()
+        public List<Company> GetCompanyList()
         {
-            return companyDal.companies();
+            return companyDal.GetCompanyList();
         }
         /// <summary>
         /// 添加公司信息
@@ -34,9 +34,9 @@ namespace Social.BLL
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public int DelCompany(int Id)
+        public int DelCompany(int id)
         {
-            return companyDal.DelCompany(Id);
+            return companyDal.DelCompany(id);
         }
         /// <summary>
         /// 修改公司信息

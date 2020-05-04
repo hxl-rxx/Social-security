@@ -17,9 +17,9 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public List<Company> companies()
+        public List<Company> GetCompanyList()
         {
-            return companyBll.companies();
+            return companyBll.GetCompanyList();
         }
 
         /// <summary>
@@ -40,9 +40,9 @@ namespace Social_Sercuitys.API.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpDelete]
-        public int DelCompany(int Id)
+        public int DelCompany(int id)
         {
-            return companyBll.DelCompany(Id);
+            return companyBll.DelCompany(id);
         }
 
         /// <summary>
