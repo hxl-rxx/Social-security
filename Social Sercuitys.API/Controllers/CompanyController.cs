@@ -16,7 +16,7 @@ namespace Social_Sercuitys.API.Controllers
         /// 显示公司注册信息
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         public List<Company> GetCompanyList()
         {
             return companyBll.GetCompanyList();
