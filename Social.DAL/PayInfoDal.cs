@@ -20,7 +20,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = "select * from payinfo";
+                string sql = "select * from payinfo p join company c on p.Cid=c.CompanyId join employee e on p.Eid=e.ID join insuranceType t on p.Iid=t.ID";
                 var query = connection.Query<PayInfo>(sql);
                 return query.ToList();
             }
@@ -34,7 +34,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"insert into payinfo values(null,'{payinfo.Cid}','{payinfo.Eid}','{payinfo.ExpenType}','{payinfo.lid}','{payinfo.Ccost}','{payinfo.Ecost}','{payinfo.Month}','{payinfo.BeginMonth}','{payinfo.EndMonth}')";
+                string sql = $"insert into payinfo values(null,'{payinfo.Cid}','{payinfo.Eid}','{payinfo.ExpenType}','{payinfo.Iid}','{payinfo.Ccost}','{payinfo.Ecost}','{payinfo.Month}','{payinfo.BeginMonth}','{payinfo.EndMonth}')";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -43,13 +43,34 @@ namespace Social.DAL
         /// 查询缴费明细
         /// </summary>
         /// <returns></returns>
-        public List<PayInfo> GetPayinfos(int cid, string Name, string IDcard, int lid)
+        public List<PayInfo> GetPayinfos(int cid = -1, string name = "", int iid = -1)
+        {
+            List<PayInfo> payInfoList = GetPayinfos();
+            if (!string.IsNullOrEmpty(name))
+            {
+                payInfoList = payInfoList.Where(p => p.Name.Contains(name)).ToList();
+            }
+            if (cid != -1)
+            {
+                payInfoList = payInfoList.Where(p => p.Cid == cid).ToList();
+            }
+            if (iid != -1)
+            {
+                payInfoList = payInfoList.Where(p => p.Iid == iid).ToList();
+            }
+            return payInfoList;
+        }
+        /// <summary>
+        /// 删除缴费信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int DelPayInfo(int id)
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"select * from payinfo p join company c on p.Cid=c.ID join employee on p.Eid=e.ID join insuranceType t on p.lid=t.ID where Cid='{cid}' || e.Name like '%'+{Name}+'%'|| e.IDcard='{IDcard}' || t.ID='{lid}' ";
-                var query = connection.Query<PayInfo>(sql);
-                return query.ToList();
+                string sql = "delete from payinfo where ID =" + id;
+                return connection.Execute(sql);
             }
         }
     }

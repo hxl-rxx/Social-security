@@ -31,9 +31,18 @@ namespace Social.BLL
         /// 查询缴费明细
         /// </summary>
         /// <returns></returns>
-        public List<PayInfo> GetPayinfos(int cid, string Name, string IDcard, int lid)
+        public List<PayInfo> GetPayinfos(int cid = -1, string name = "", int iid = -1)
         {
-            return infoDal.GetPayinfos(cid, Name, IDcard, lid);
+            return infoDal.GetPayinfos(cid, name, iid);
+        }
+        /// <summary>
+        /// 删除缴费信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int DelPayInfo(int id)
+        {
+            return infoDal.DelPayInfo(id);
         }
     }
 }

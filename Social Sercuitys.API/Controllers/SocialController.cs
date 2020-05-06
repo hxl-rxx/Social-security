@@ -24,6 +24,17 @@ namespace Social_Sercuitys.API.Controllers
         }
 
         /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public int Adduser(UserLogin user)
+        {
+            return bll.Adduser(user);
+        }
+
+        /// <summary>
         /// 查询权限信息
         /// </summary>
         /// <returns></returns>

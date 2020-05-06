@@ -24,7 +24,7 @@ namespace Social.DAL
         {
             using(MySqlConnection connection=new MySqlConnection(coon))
             {
-                string sql = $"select count(1) from userLogin where Name='{name}' and passWord='{pwd}' " ;
+                string sql = $"select count(1) from userLogin where Uname='{name}' and passWord='{pwd}' " ;
                 var query = connection.ExecuteScalar(sql);
                 return Convert.ToInt32(query);
             }
@@ -69,7 +69,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(coon))
             {
-                string sql = $"select *from insurancetype";
+                string sql = $"select * from insurancetype";
                 var query = connection.Query<Insurancetype>(sql);
                 return query.ToList();
 

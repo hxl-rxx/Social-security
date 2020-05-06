@@ -12,12 +12,15 @@ namespace Social.Model
         public int Cid { get; set; }
         public int Eid { get; set; }
         public int ExpenType { get; set; }
-        public int MyProperty { get; set; }
-        public int lid { get; set; }
+        public int Iid { get; set; }
         public decimal Ccost { get; set; }
         public decimal Ecost { get; set; }
         public int Month { get; set; }
         public string BeginMonth { get; set; }
         public string EndMonth { get; set; }
+
+        public string Cname { get; set; }
+        public string Name { get; set; }
+        public string Iname { get; set; }
     }
 }

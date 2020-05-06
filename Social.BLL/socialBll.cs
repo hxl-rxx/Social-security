@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,16 @@ namespace Social.BLL
         {
             return dal.Login(name, pwd);
         }
-        
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public int Adduser(UserLogin user)
+        {
+            return dal.Adduser(user);
+        }
+
         /// <summary>
         /// 查询权限信息
         /// </summary>
