@@ -38,9 +38,9 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<PayInfo> GetPayinfos(int cid = -1, string name = "", int iid = -1)
+        public List<PayInfo> GetPayinfo(Nullable<int> cid = -1, string name = "", Nullable<int> iid = -1)
         {
-            return payinfoBll.GetPayinfos(cid, name, iid);
+            return payinfoBll.GetPayinfo(cid, name, iid);
         }
         /// <summary>
         /// 删除缴费信息

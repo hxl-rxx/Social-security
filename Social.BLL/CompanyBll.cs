@@ -32,7 +32,7 @@ namespace Social.BLL
         /// <summary>
         /// 删除公司信息
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         public int DelCompany(int id)
         {
@@ -41,12 +41,12 @@ namespace Social.BLL
         /// <summary>
         /// 修改公司信息
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <param name="company"></param>
         /// <returns></returns>
-        public int UptCompany(int Id, Company company)
+        public int UptCompany(int id, Company company)
         {
-            return companyDal.UptCompany(Id, company);
+            return companyDal.UptCompany(id, company);
         }
         /// <summary>
         /// 查询公司信息

@@ -58,14 +58,14 @@ namespace Social.DAL
         /// <summary>
         /// 修改公司信息
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <param name="company"></param>
         /// <returns></returns>
-        public int UptCompany(int Id, Company company)
+        public int UptCompany(int id, Company company)
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"Update Company set Cname='{company.Cname}',Salesman='{company.Salesman}',CreateTime='{company.CreateTime}' where CompanyId='{Id}'";
+                string sql = $"Update Company set Cname='{company.Cname}',Salesman='{company.Salesman}',CreateTime='{company.CreateTime}' where CompanyId='{id}'";
                 var query = connection.Execute(sql);
                 return query;
             }
