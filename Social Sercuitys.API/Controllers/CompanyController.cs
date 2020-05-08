@@ -30,7 +30,6 @@ namespace Social_Sercuitys.API.Controllers
         [HttpPost]
         public int AddCompany(Company company)
         {
-
             return companyBll.AddCompany(company);
         }
 
@@ -39,7 +38,7 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpGet]
         public int DelCompany(int id)
         {
             return companyBll.DelCompany(id);
@@ -51,10 +50,10 @@ namespace Social_Sercuitys.API.Controllers
         /// <param name="Id"></param>
         /// <param name="company"></param>
         /// <returns></returns>
-        [HttpPut]
-        public int UptCompany(int Id, Company company)
+        [HttpPost]
+        public int UptCompany(int id, Company company)
         {
-            return companyBll.UptCompany(Id, company);
+            return companyBll.UptCompany(id, company);
         }
 
         /// <summary>
