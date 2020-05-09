@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Net;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
@@ -25,7 +26,8 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"select * from employee join company on employee.Cid=company.CompanyId ";
+                string sql = $"select * from employee join company on employee.Cid=company.CompanyId limit 3";
+                
                 MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
                 DataTable dt = new DataTable();
                 dr.Fill(dt);
@@ -40,6 +42,31 @@ namespace Social.DAL
                     Cid = Convert.ToInt32(e["Cid"]),
                     Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
                 }).ToList();
+               
+                return query;
+            }
+        }
+        public List<Employees> GetEmployeesd()
+        {
+            using (MySqlConnection connection = new MySqlConnection(Coon))
+            {
+                string sql = $"select * from employee join company on employee.Cid=company.CompanyId limit 5,4";
+
+                MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
+                DataTable dt = new DataTable();
+                dr.Fill(dt);
+                List<Employees> query = dt.AsEnumerable().Select(e => new Employees
+                {
+                    ID = Convert.ToInt32(e["ID"]),
+                    Name = Convert.ToString(e["Name"]),
+                    Address = Convert.ToString(e["Address"]),
+                    Sex = Convert.ToInt32(e["Sex"]),
+                    IDCard = Convert.ToString(e["IDCard"]),
+                    Tel = Convert.ToString(e["Tel"]),
+                    Cid = Convert.ToInt32(e["Cid"]),
+                    Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
+                }).ToList();
+
                 return query;
             }
         }
@@ -111,7 +138,7 @@ namespace Social.DAL
         }
         /// <summary>
         /// 查询员工信息
-        /// </summary>
+        ///</summary>
         /// <returns></returns>
         public List<Employees> GetEmployees(string name = "", int cid = -1)
         {

@@ -22,7 +22,11 @@ namespace Social_Sercuitys.API.Controllers
         {
             return employeeBll.GetEmployees();
         }
-
+        [HttpGet]
+        public List<Employees> GetEmployeesd()
+        {
+            return employeeBll.GetEmployeesd();
+        }
         /// <summary>
         /// 查询员工信息
         /// </summary>

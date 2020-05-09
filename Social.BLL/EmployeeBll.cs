@@ -18,7 +18,10 @@ namespace Social.BLL
         {
             return employeeDal.GetEmployees();
         }
-
+        public List<Employees> GetEmployeesd()
+        {
+            return employeeDal.GetEmployeesd();
+        }
 
         /// <summary>
         /// 查询员工信息
