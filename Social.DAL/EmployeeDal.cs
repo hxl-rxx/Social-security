@@ -113,7 +113,7 @@ namespace Social.DAL
         /// 查询员工信息
         /// </summary>
         /// <returns></returns>
-        public List<Employees> GetEmployees(string name)
+        public List<Employees> GetEmployees(string name = "", int cid = -1)
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {

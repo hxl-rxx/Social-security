@@ -21,7 +21,16 @@ namespace Social_Sercuitys.API.Controllers
         {
             return companyBll.GetCompanyList();
         }
-
+        [HttpGet]
+        /// <summary>
+        /// 根据Id查询单条信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Company GetCompanyById(int id)
+        {
+            return companyBll.GetCompanyById(id);
+        }
         /// <summary>
         /// 添加公司信息
         /// </summary>
@@ -36,7 +45,7 @@ namespace Social_Sercuitys.API.Controllers
         /// <summary>
         /// 删除公司信息
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
         public int DelCompany(int id)
@@ -47,7 +56,7 @@ namespace Social_Sercuitys.API.Controllers
         /// <summary>
         /// 修改公司信息
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <param name="company"></param>
         /// <returns></returns>
         [HttpPost]

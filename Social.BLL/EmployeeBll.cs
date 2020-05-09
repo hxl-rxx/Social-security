@@ -24,9 +24,9 @@ namespace Social.BLL
         /// 查询员工信息
         /// </summary>
         /// <returns></returns>
-        public List<Employees> GetEmployees(string name)
+        public List<Employees> GetEmployees(string name = "", int cid = -1)
         {
-            return employeeDal.GetEmployees(name);
+            return employeeDal.GetEmployees(name,cid);
         }
         /// <summary>
         /// 添加员工信息

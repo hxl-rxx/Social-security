@@ -28,9 +28,9 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<Employees> GetEmployees(string name)
+        public List<Employees> GetEmployees(string name = "",int cid = -1)
         {
-            return employeeBll.GetEmployees(name);
+            return employeeBll.GetEmployees(name,cid);
         }
 
         /// <summary>

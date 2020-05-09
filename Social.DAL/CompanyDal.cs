@@ -26,6 +26,20 @@ namespace Social.DAL
             }
         }
         /// <summary>
+        /// 根据Id查询单条信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Company GetCompanyById(int id)
+        {
+            using (MySqlConnection connection = new MySqlConnection(Coon))
+            {
+                string sql = "select * from company where CompanyId = "+id;
+                var query = connection.QueryFirstOrDefault<Company>(sql);
+                return query;
+            }
+        }
+        /// <summary>
         /// 添加公司信息
         /// </summary>
         /// <param name="company"></param>
