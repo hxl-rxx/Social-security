@@ -18,7 +18,7 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<Employees> GetEmployees()
+        public List<Employees> GetAllEmployees()
         {
             return employeeBll.GetEmployees();
         }

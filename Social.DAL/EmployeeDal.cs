@@ -5,7 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Net;
-using System.Reflection.Metadata;
+//using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
@@ -144,46 +144,30 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                if (name != null)
+                string sql = $"select * from employee join company on employee.Cid=company.CompanyId";
+                MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
+                DataTable dt = new DataTable();
+                dr.Fill(dt);
+                List<Employees> query = dt.AsEnumerable().Select(e => new Employees
                 {
-                    connection.Open();
-                    string sql = $"select * from employee join company on employee.Cid=company.CompanyId";
-                    MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
-                    DataTable dt = new DataTable();
-                    dr.Fill(dt);
-                    List<Employees> query = dt.AsEnumerable().Select(e => new Employees
-                    {
-                        ID = Convert.ToInt32(e["ID"]),
-                        Name = Convert.ToString(e["Name"]),
-                        Address = Convert.ToString(e["Address"]),
-                        Sex = Convert.ToInt32(e["Sex"]),
-                        IDCard = Convert.ToString(e["IDCard"]),
-                        Tel = Convert.ToString(e["Tel"]),
-                        Cid = Convert.ToInt32(e["Cid"]),
-                        Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
-                    }).ToList().Where(e => e.Name.Contains(name)).ToList();
-                    return query;
-                }
-                else
+                    ID = Convert.ToInt32(e["ID"]),
+                    Name = Convert.ToString(e["Name"]),
+                    Address = Convert.ToString(e["Address"]),
+                    Sex = Convert.ToInt32(e["Sex"]),
+                    IDCard = Convert.ToString(e["IDCard"]),
+                    Tel = Convert.ToString(e["Tel"]),
+                    Cid = Convert.ToInt32(e["Cid"]),
+                    Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
+                }).ToList();
+                if (!string.IsNullOrEmpty(name))
                 {
-                    connection.Open();
-                    string sql = $"select * from employee join company on employee.Cid=company.CompanyId";
-                    MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
-                    DataTable dt = new DataTable();
-                    dr.Fill(dt);
-                    List<Employees> query = dt.AsEnumerable().Select(e => new Employees
-                    {
-                        ID = Convert.ToInt32(e["ID"]),
-                        Name = Convert.ToString(e["Name"]),
-                        Address = Convert.ToString(e["Address"]),
-                        Sex = Convert.ToInt32(e["Sex"]),
-                        IDCard = Convert.ToString(e["IDCard"]),
-                        Tel = Convert.ToString(e["Tel"]),
-                        Cid = Convert.ToInt32(e["Cid"]),
-                        Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
-                    }).ToList();
-                    return query;
+                    query = query.Where(q => q.Name.Contains(name)).ToList();
                 }
+                if (cid != -1)
+                {
+                    query = query.Where(q => q.Cid == cid).ToList();
+                }
+                return query;
 
             }
         }
