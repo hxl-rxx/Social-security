@@ -26,7 +26,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"select * from employee join company on employee.Cid=company.CompanyId limit 3";
+                string sql = $"select * from employee join company on employee.Cid=company.CompanyId join address on employee.Aid=address.Aid join Regist on employee.Rid=Regist.Rid";
 
                 MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
                 DataTable dt = new DataTable();
@@ -40,7 +40,16 @@ namespace Social.DAL
                     IDCard = Convert.ToString(e["IDCard"]),
                     Tel = Convert.ToString(e["Tel"]),
                     Cid = Convert.ToInt32(e["Cid"]),
-                    Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
+                    Aid=Convert.ToInt32(e["Aid"]),
+                    Fixphone=Convert.ToString(e["Fixphone"]),
+                    Rid=Convert.ToInt32(e["Rid"]),
+                    OpenBank=Convert.ToString(e["OpenBank"]),
+                    OpenName=Convert.ToString(e["OpenName"]),
+                    subBank=Convert.ToString(e["subBank"]),
+                    BankNumber=Convert.ToString(e["BankNumber"]),
+                    Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) },
+                    address=new Address { Aname=Convert.ToString(e["Aname"])},
+                    regist=new Regist { Rname=Convert.ToString(e["Rname"])}
                 }).ToList();
 
                 return query;
@@ -50,7 +59,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"select * from employee join company on employee.Cid=company.CompanyId limit 5,4";
+                string sql = $"select * from employee join company on employee.Cid=company.CompanyId join address on employee.Aid=address.Aid join Regist on employee.Rid=Regist.Rid limit 5,4";
 
                 MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
                 DataTable dt = new DataTable();
@@ -64,7 +73,16 @@ namespace Social.DAL
                     IDCard = Convert.ToString(e["IDCard"]),
                     Tel = Convert.ToString(e["Tel"]),
                     Cid = Convert.ToInt32(e["Cid"]),
-                    Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
+                    Aid = Convert.ToInt32(e["Aid"]),
+                    Fixphone = Convert.ToString(e["Fixphone"]),
+                    Rid = Convert.ToInt32(e["Rid"]),
+                    OpenBank = Convert.ToString(e["OpenBank"]),
+                    OpenName = Convert.ToString(e["OpenName"]),
+                    subBank = Convert.ToString(e["subBank"]),
+                    BankNumber = Convert.ToString(e["BankNumber"]),
+                    Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) },
+                    address = new Address { Aname = Convert.ToString(e["Aname"]) },
+                    regist = new Regist { Rname = Convert.ToString(e["Rname"]) }
                 }).ToList();
 
                 return query;
@@ -78,7 +96,8 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"insert into employee values (null,'{employee.Name}','{employee.IDCard}',{employee.Sex},{employee.Cid},'{employee.Tel}','{employee.Address}') ";
+                connection.Open();
+                string sql = $"insert into employee values (null,'{employee.Name}','{employee.IDCard}',{employee.Sex},{employee.Cid},'{employee.Tel}','{employee.Address}',{employee.Aid},'{employee.Fixphone}',{employee.Rid},'{employee.OpenBank}','{employee.OpenName}','{employee.subBank}','{employee.BankNumber}') ";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -87,7 +106,7 @@ namespace Social.DAL
         /// 删除员工信息
         /// </summary>
         /// <returns></returns>
-        public int DelEmployees(int id)
+        public int DelEmployees(string id)
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
@@ -105,7 +124,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"select * from employee join company on employee.Cid=company.CompanyId where ID={id}; ";
+                string sql = $"select * from employee join company on employee.Cid=company.CompanyId join address on employee.Aid=address.Aid join Regist on employee.Rid=Regist.Rid where ID={id}; ";
                 MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
                 DataTable dt = new DataTable();
                 dr.Fill(dt);
@@ -118,7 +137,16 @@ namespace Social.DAL
                     IDCard = Convert.ToString(e["IDCard"]),
                     Tel = Convert.ToString(e["Tel"]),
                     Cid = Convert.ToInt32(e["Cid"]),
-                    Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
+                    Aid = Convert.ToInt32(e["Aid"]),
+                    Fixphone = Convert.ToString(e["Fixphone"]),
+                    Rid = Convert.ToInt32(e["Rid"]),
+                    OpenBank = Convert.ToString(e["OpenBank"]),
+                    OpenName = Convert.ToString(e["OpenName"]),
+                    subBank = Convert.ToString(e["subBank"]),
+                    BankNumber = Convert.ToString(e["BankNumber"]),
+                    Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) },
+                    address = new Address { Aname = Convert.ToString(e["Aname"]) },
+                    regist = new Regist { Rname = Convert.ToString(e["Rname"]) }
                 }).ToList();
                 return query.FirstOrDefault();
             }
@@ -131,7 +159,7 @@ namespace Social.DAL
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
-                string sql = $"Update employee set Name='{employees.Name}',IDCard='{employees.IDCard}',Sex={employees.Sex},Cid={employees.Cid}, Tel='{employees.Tel}', Address='{employees.Address}' where ID={employees.ID}";
+                string sql = $"Update employee set Name='{employees.Name}',IDCard='{employees.IDCard}',Sex={employees.Sex},Cid={employees.Cid}, Tel='{employees.Tel}', Address='{employees.Address}',Aid='{employees.Aid}',Fixphone='{employees.Fixphone}',Rid='{employees.Rid}',OpenBank='{employees.OpenBank}',OpenName='{employees.OpenName}',SubBank='{employees.subBank}',BankNumber='{employees.BankNumber}' where ID={employees.ID}";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -147,7 +175,7 @@ namespace Social.DAL
                 if (name != null)
                 {
                     connection.Open();
-                    string sql = $"select * from employee join company on employee.Cid=company.CompanyId";
+                    string sql = $"select * from employee join company on employee.Cid=company.CompanyId join address on employee.Aid=address.Aid join Regist on employee.Rid=Regist.Rid";
                     MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
                     DataTable dt = new DataTable();
                     dr.Fill(dt);
@@ -160,14 +188,24 @@ namespace Social.DAL
                         IDCard = Convert.ToString(e["IDCard"]),
                         Tel = Convert.ToString(e["Tel"]),
                         Cid = Convert.ToInt32(e["Cid"]),
-                        Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
-                    }).ToList().Where(e => e.Name.Contains(name)&&e.Cid==cid).ToList();
+                        Aid = Convert.ToInt32(e["Aid"]),
+                        Fixphone = Convert.ToString(e["Fixphone"]),
+                        Rid = Convert.ToInt32(e["Rid"]),
+                        OpenBank = Convert.ToString(e["OpenBank"]),
+                        OpenName = Convert.ToString(e["OpenName"]),
+                        subBank = Convert.ToString(e["subBank"]),
+                        BankNumber = Convert.ToString(e["BankNumber"]),
+                        Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) },
+                        address = new Address { Aname = Convert.ToString(e["Aname"]) },
+                        regist = new Regist { Rname = Convert.ToString(e["Rname"]) }
+                    }).ToList().Where(e => e.Name.Contains(name) && e.Cid == cid).ToList();
                     return query;
                 }
+
                 else
                 {
                     connection.Open();
-                    string sql = $"select * from employee join company on employee.Cid=company.CompanyId";
+                    string sql = $"select * from employee join company on employee.Cid=company.CompanyId join address on employee.Aid=address.Aid join Regist on employee.Rid=Regist.Rid";
                     MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
                     DataTable dt = new DataTable();
                     dr.Fill(dt);
@@ -180,13 +218,23 @@ namespace Social.DAL
                         IDCard = Convert.ToString(e["IDCard"]),
                         Tel = Convert.ToString(e["Tel"]),
                         Cid = Convert.ToInt32(e["Cid"]),
-                        Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
+                        Aid = Convert.ToInt32(e["Aid"]),
+                        Fixphone = Convert.ToString(e["Fixphone"]),
+                        Rid = Convert.ToInt32(e["Rid"]),
+                        OpenBank = Convert.ToString(e["OpenBank"]),
+                        OpenName = Convert.ToString(e["OpenName"]),
+                        subBank = Convert.ToString(e["subBank"]),
+                        BankNumber = Convert.ToString(e["BankNumber"]),
+                        Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) },
+                        address = new Address { Aname = Convert.ToString(e["Aname"]) },
+                        regist = new Regist { Rname = Convert.ToString(e["Rname"]) }
                     }).ToList();
                     return query;
                 }
+            }
 
             }
         }
         
     }
-}
+

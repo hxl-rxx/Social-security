@@ -53,7 +53,7 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <returns></returns>
        [HttpPost]
-        public int DelEmployees(int id)
+        public int DelEmployees(string id)
         {
             return employeeBll.DelEmployees(id);
         }

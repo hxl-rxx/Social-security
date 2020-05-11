@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
@@ -47,6 +48,22 @@ namespace Social.BLL
         public List<Insurancetype> GetInsurancetypes()
         {
             return dal.GetInsurancetypes();
+        }
+        /// <summary>
+        /// 显示户口类型
+        /// </summary>
+        /// <returns></returns>
+        public List<Regist> GetRegists()
+        {
+            return dal.GetRegists();
+        }
+        /// <summary>
+        /// 显示地址
+        /// </summary>
+        /// <returns></returns>
+        public List<Address> GetAddresses()
+        {
+            return dal.GetAddresses();
         }
     }
 }

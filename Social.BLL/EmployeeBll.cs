@@ -44,7 +44,7 @@ namespace Social.BLL
         /// 删除员工信息
         /// </summary>
         /// <returns></returns>
-        public int DelEmployees(int id)
+        public int DelEmployees(string id)
         {
             return employeeDal.DelEmployees(id);
         }

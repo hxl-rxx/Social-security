@@ -52,5 +52,23 @@ namespace Social_Sercuitys.API.Controllers
         {
             return bll.GetInsurancetypes();
         }
+        /// <summary>
+        /// 显示户口类型
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public List<Regist> GetRegists()
+        {
+            return bll.GetRegists();
+        }
+        /// <summary>
+        /// 显示地址
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public List<Address> GetAddresses()
+        {
+            return bll.GetAddresses();
+        }
     }
 }

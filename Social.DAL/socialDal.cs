@@ -75,6 +75,32 @@ namespace Social.DAL
 
             }
         }
+        /// <summary>
+        /// 显示户口类型
+        /// </summary>
+        /// <returns></returns>
+        public List<Regist> GetRegists()
+        {
+            using (MySqlConnection connection = new MySqlConnection(coon))
+            {
+                string sql = "select * from Regist";
+                var query = connection.Query<Regist>(sql);
+                return query.ToList();
+            }
+        }
+        /// <summary>
+        /// 显示地址
+        /// </summary>
+        /// <returns></returns>
+        public List<Address> GetAddresses()
+        {
+            using (MySqlConnection connection = new MySqlConnection(coon))
+            {
+                string sql = "select * from address";
+                var query = connection.Query<Address>(sql);
+                return query.ToList();
+            }
+        }
 
     }
 }

@@ -42,11 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="Employees.cs" />
     <Compile Include="Insurancetype.cs" />
     <Compile Include="PayInfo.cs" />
     <Compile Include="Power.cs" />
+    <Compile Include="Regist.cs" />
     <Compile Include="UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
