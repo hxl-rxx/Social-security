@@ -32,10 +32,11 @@ namespace Social_Sercuitys.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<Employees> GetEmployees(string name)
+        public List<Employees> GetEmployees(string name,int cid)
         {
-            return employeeBll.GetEmployees(name);
+            return employeeBll.GetEmployees(name,cid);
         }
+     
 
         /// <summary>
         /// 添加员工信息

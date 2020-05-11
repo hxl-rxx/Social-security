@@ -13,11 +13,11 @@ using MySql.Data.MySqlClient;
 using Social.Model;
 namespace Social.DAL
 {
-  public  class EmployeeDal
+    public class EmployeeDal
     {
         static readonly string Coon = ConfigurationManager.ConnectionStrings["SqlData"].ConnectionString;
 
-       
+
         /// <summary>
         /// 显示员工信息
         /// </summary>
@@ -27,7 +27,7 @@ namespace Social.DAL
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
                 string sql = $"select * from employee join company on employee.Cid=company.CompanyId limit 3";
-                
+
                 MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
                 DataTable dt = new DataTable();
                 dr.Fill(dt);
@@ -42,7 +42,7 @@ namespace Social.DAL
                     Cid = Convert.ToInt32(e["Cid"]),
                     Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
                 }).ToList();
-               
+
                 return query;
             }
         }
@@ -130,7 +130,7 @@ namespace Social.DAL
         public int UptEmployees(Employees employees)
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
-            { 
+            {
                 string sql = $"Update employee set Name='{employees.Name}',IDCard='{employees.IDCard}',Sex={employees.Sex},Cid={employees.Cid}, Tel='{employees.Tel}', Address='{employees.Address}' where ID={employees.ID}";
                 var query = connection.Execute(sql);
                 return query;
@@ -140,7 +140,7 @@ namespace Social.DAL
         /// 查询员工信息
         ///</summary>
         /// <returns></returns>
-        public List<Employees> GetEmployees(string name)
+        public List<Employees> GetEmployees(string name,int cid)
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
@@ -161,7 +161,7 @@ namespace Social.DAL
                         Tel = Convert.ToString(e["Tel"]),
                         Cid = Convert.ToInt32(e["Cid"]),
                         Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) }
-                    }).ToList().Where(e => e.Name.Contains(name)).ToList();
+                    }).ToList().Where(e => e.Name.Contains(name)&&e.Cid==cid).ToList();
                     return query;
                 }
                 else
@@ -187,6 +187,6 @@ namespace Social.DAL
 
             }
         }
+        
     }
-    
 }
