@@ -20,6 +20,15 @@ namespace Social.BLL
             return companyDal.GetCompanyList();
         }
         /// <summary>
+        /// 根据Id查询单条信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Company GetCompanyById(int id)
+        {
+            return companyDal.GetCompanyById(id);
+        }
+        /// <summary>
         /// 添加公司信息
         /// </summary>
         /// <param name="company"></param>

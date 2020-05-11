@@ -32,6 +32,8 @@ namespace Social.DAL
         /// <returns></returns>
         public int AddPayInto(PayInfo payinfo)
         {
+            payinfo.BeginMonth = DateTime.Now.ToString("yyyy-MM");
+            payinfo.EndMonth = DateTime.Now.AddMonths(payinfo.Month).ToString("yyyy-MM");
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
                 string sql = $"insert into payinfo values(null,'{payinfo.Cid}','{payinfo.Eid}','{payinfo.ExpenType}','{payinfo.Iid}','{payinfo.Ccost}','{payinfo.Ecost}','{payinfo.Month}','{payinfo.BeginMonth}','{payinfo.EndMonth}')";
