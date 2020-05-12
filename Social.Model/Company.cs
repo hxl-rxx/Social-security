@@ -13,6 +13,8 @@ namespace Social.Model
         public int Companyid { get; set; }
         public string Cname { get; set; }
         public string Salesman { get; set; }
+        public string Addresses { get; set; }
+        public string Ctype { get; set; }
         public DateTime CreateTime { get; set; }
     }
 }

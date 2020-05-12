@@ -50,7 +50,7 @@ namespace Social.DAL
             using (MySqlConnection connection = new MySqlConnection(Coon))
             {
                 connection.Open();
-                string sql = $"insert into company values(null,'{company.Cname}','{company.Salesman}','{company.CreateTime}')";
+                string sql = $"insert into company values(null,'{company.Cname}','{company.Salesman}','{company.Addresses}','{company.Ctype}','{company.CreateTime}')";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -96,7 +96,11 @@ namespace Social.DAL
                 connection.Open();
                 string sql = "select * from company";
                 var query = connection.Query<Company>(sql);
-                return query.ToList().Where(s => s.Cname.Contains(name)).ToList();
+                if(!string.IsNullOrEmpty(name))
+                {
+                    return query.ToList().Where(s => s.Cname.Contains(name)).ToList();
+                }
+                return query.ToList();
             }
         }
     }
