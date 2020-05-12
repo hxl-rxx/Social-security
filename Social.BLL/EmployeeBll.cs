@@ -27,16 +27,17 @@ namespace Social.BLL
         /// 查询员工信息
         /// </summary>
         /// <returns></returns>
-        public List<Employees> GetEmployees(string name,int cid)
+        public List<Employees> GetEmployees(int cid, string name)
         {
-            return employeeDal.GetEmployees(name, cid);
+            return employeeDal.GetEmployees(cid,name);
         }
       
-            /// <summary>
-            /// 添加员工信息
-            /// </summary>
-            /// <returns></returns>
-            public int AddEmployees(Employees employee)
+
+        /// <summary>
+        /// 添加员工信息
+        /// </summary>
+        /// <returns></returns>
+        public int AddEmployees(Employees employee)
         {
             return employeeDal.AddEmployees(employee);
         }

@@ -25,9 +25,9 @@ namespace Social.Model
         public string BankNumber { get; set; }
         [ForeignKey("")]
         public Company Companys { get; set; }
-        [ForeignKey("")]
+   
         public Address address { get; set; }
-        [ForeignKey("")]
+      
         public Regist regist { get; set; }
     }
 }

@@ -95,9 +95,8 @@ namespace Social.DAL
         public int AddEmployees(Employees employee)
         {
             using (MySqlConnection connection = new MySqlConnection(Coon))
-            {
-                connection.Open();
-                string sql = $"insert into employee values (null,'{employee.Name}','{employee.IDCard}',{employee.Sex},{employee.Cid},'{employee.Tel}','{employee.Address}',{employee.Aid},'{employee.Fixphone}',{employee.Rid},'{employee.OpenBank}','{employee.OpenName}','{employee.subBank}','{employee.BankNumber}') ";
+            { 
+                string sql = $"INSERT into employee VALUES(NULL,'{employee.Name}','{employee.IDCard}',{employee.Sex},{employee.Cid},'{employee.Tel}','{employee.Address}','{employee.Aid}','{employee.Fixphone}','{employee.Rid}','{employee.OpenBank}','{employee.OpenName}','{employee.subBank}','{employee.BankNumber}')";
                 var query = connection.Execute(sql);
                 return query;
             }
@@ -165,15 +164,15 @@ namespace Social.DAL
             }
         }
         /// <summary>
-        /// 查询员工信息
+        /// 根据姓名查询员工信息
         ///</summary>
         /// <returns></returns>
-        public List<Employees> GetEmployees(string name,int cid)
+        public List<Employees> GetEmployees(int cid,string name)
         {
-            using (MySqlConnection connection = new MySqlConnection(Coon))
-            {
-                if (name != null)
+           
+                using (MySqlConnection connection = new MySqlConnection(Coon))
                 {
+
                     connection.Open();
                     string sql = $"select * from employee join company on employee.Cid=company.CompanyId join address on employee.Aid=address.Aid join Regist on employee.Rid=Regist.Rid";
                     MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
@@ -198,43 +197,21 @@ namespace Social.DAL
                         Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) },
                         address = new Address { Aname = Convert.ToString(e["Aname"]) },
                         regist = new Regist { Rname = Convert.ToString(e["Rname"]) }
-                    }).ToList().Where(e => e.Name.Contains(name) && e.Cid == cid).ToList();
-                    return query;
-                }
-
-                else
+                    }).ToList()/*.Where(e => e.Name.Contains(name) || e.Cid == cid).ToList()*/;
+                if(!string.IsNullOrWhiteSpace(name))
                 {
-                    connection.Open();
-                    string sql = $"select * from employee join company on employee.Cid=company.CompanyId join address on employee.Aid=address.Aid join Regist on employee.Rid=Regist.Rid";
-                    MySqlDataAdapter dr = new MySqlDataAdapter(new MySqlCommand(sql, connection));
-                    DataTable dt = new DataTable();
-                    dr.Fill(dt);
-                    List<Employees> query = dt.AsEnumerable().Select(e => new Employees
-                    {
-                        ID = Convert.ToInt32(e["ID"]),
-                        Name = Convert.ToString(e["Name"]),
-                        Address = Convert.ToString(e["Address"]),
-                        Sex = Convert.ToInt32(e["Sex"]),
-                        IDCard = Convert.ToString(e["IDCard"]),
-                        Tel = Convert.ToString(e["Tel"]),
-                        Cid = Convert.ToInt32(e["Cid"]),
-                        Aid = Convert.ToInt32(e["Aid"]),
-                        Fixphone = Convert.ToString(e["Fixphone"]),
-                        Rid = Convert.ToInt32(e["Rid"]),
-                        OpenBank = Convert.ToString(e["OpenBank"]),
-                        OpenName = Convert.ToString(e["OpenName"]),
-                        subBank = Convert.ToString(e["subBank"]),
-                        BankNumber = Convert.ToString(e["BankNumber"]),
-                        Companys = new Company { Cname = Convert.ToString(e["Cname"]), CreateTime = Convert.ToDateTime(e["CreateTime"]), Salesman = Convert.ToString(e["Salesman"]) },
-                        address = new Address { Aname = Convert.ToString(e["Aname"]) },
-                        regist = new Regist { Rname = Convert.ToString(e["Rname"]) }
-                    }).ToList();
-                    return query;
+                    query = query.Where(e => e.Name.Contains(name)).ToList();
                 }
-            }
-
+                if(cid!=0)
+                {
+                    query = query.Where(e => e.Cid == cid).ToList();
+                }
+                
+                return query;
             }
         }
-        
+       
     }
+        
+}
 
